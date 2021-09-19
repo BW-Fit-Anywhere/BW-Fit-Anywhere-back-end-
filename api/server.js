@@ -6,7 +6,12 @@ const server = express();
 
 server.use(helmet());
 server.use(express.json());
-server.use(cors());
+server.use(cors()); 
+
+
+server.get('/', (req,res) => {
+    res.json('Api is up!')
+})
 
 server.use((err, req, res, next) => { // eslint-disable-line
     res.status(err.status || 500).json({
