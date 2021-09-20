@@ -15,7 +15,7 @@ async function getById(id){
 }
 
 async function add ({ username, password }){
-    const [user] = await db('users').insert({ username, password});
+    const user = await db('users').insert({ username, password});
     return user
 }
 
