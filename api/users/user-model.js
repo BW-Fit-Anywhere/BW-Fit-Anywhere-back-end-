@@ -14,9 +14,9 @@ async function getById(id){
     .where('user_id', id)
 }
 
-async function add ({username, password}){
-    const [id] = await db('users').insert({ username, password});
-    return getById(id)
+async function add ({ username, password }){
+    const [user_id] = await db('users').insert({ username, password});
+    return getById(user_id)
 }
 
 module.exports = {
