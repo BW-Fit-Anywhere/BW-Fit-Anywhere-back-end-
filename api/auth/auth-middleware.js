@@ -24,7 +24,7 @@ const restricted = (req, res, next) => {
 const checkUsernameExists = async (req,res,next) => {
     try{
         const { username } = req.body;
-        const [user] = await Auth.findBy({username});
+        const [user] = await User.findBy({username});
         if(user){
             res.status(401).json({ message : "username taken" })
         }
