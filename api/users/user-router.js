@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const Users = require('./user-model');
 
 router.get('/', async (req, res, next) => {
     try {
-        res.status(200).json({ message: '[GET] Get all current users' })
+        const users = await Users.getAll();
+        res.status(200).json(users);
     }
     catch (err) {
         next(err)
