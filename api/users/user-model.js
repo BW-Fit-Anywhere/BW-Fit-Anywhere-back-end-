@@ -14,8 +14,14 @@ async function getById(id){
     .where('user_id', id)
 }
 
+async function add ({username, password}){
+    const [id] = await db('users').insert({ username, password});
+    return getById(id)
+}
+
 module.exports = {
     getAll,
     getByFilter,
-    getById
+    getById,
+    add
 }
