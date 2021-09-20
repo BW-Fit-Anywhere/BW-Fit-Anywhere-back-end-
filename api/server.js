@@ -10,7 +10,7 @@ server.use(cors());
 
 
 server.get('/', (req,res) => {
-    res.json('Api is up!')
+    res.json('Api is up - Testing again!')
 })
 
 server.use((err, req, res, next) => { // eslint-disable-line
