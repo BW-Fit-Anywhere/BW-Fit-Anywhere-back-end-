@@ -4,7 +4,7 @@ const { checkUsernameExists, checkUsernameNotExist } = require('./auth-middlewar
 const bcrypt = require('bcryptjs')
 const Auth = require('../users/user-model');
 
-router.post('/register', checkUsernameNotExist, async (req, res, next) => {
+router.post('/register', checkUsernameExists , async (req, res, next) => {
     try {
       let user = req.body;
   
@@ -25,7 +25,7 @@ router.post('/register', checkUsernameNotExist, async (req, res, next) => {
     }
   });
 
-  router.post('/login', checkUsernameExists, async (req, res, next) => {
+  router.post('/login', checkUsernameNotExist , async (req, res, next) => {
     try{
       let { username, password } = req.body;
       await Auth.getByFilter({username})
