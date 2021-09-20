@@ -21,21 +21,21 @@ const restricted = (req, res, next) => {
   )
 }
 
-const checkUsernameExists = async (req, res, next) => {
-  try{
-    const { username } = req.body;
-    const [user] = await User.getByFilter({username});
-    if(!user){
-      res.status(401).json({ message : "invalid credentials" })
+const checkUsernameExists = async (req,res,next) => {
+    try{
+        const { username } = req.body;
+        const [user] = await Auth.findBy({username});
+        if(user){
+            res.status(401).json({ message : "username taken" })
+        }
+        else{
+            res.username = username;
+            next()
+        }
     }
-    else{
-      res.username = username
-      next()
-    }
-  }
-  catch(err){
+    catch(err){
     next(err)
-  }
+    }
 }
 
 const checkUsernameNotExist = async (req,res,next) => {
