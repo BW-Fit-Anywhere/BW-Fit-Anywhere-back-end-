@@ -1,10 +1,10 @@
 const router = require('express').Router(); 
 const generateToken = require('../../lib/generateToken');
-const { checkUsernameExists, checkUsernameNotExist } = require('./auth-middleware');
+const { checkIfUsernameExist, checkIfUsernameNotExist } = require('./auth-middleware');
 const bcrypt = require('bcryptjs')
 const Auth = require('../users/user-model');
 
-router.post('/register', checkUsernameExists , async (req, res, next) => {
+router.post('/register', checkIfUsernameExist , async (req, res, next) => {
     try {
       let user = req.body;
   
@@ -25,7 +25,7 @@ router.post('/register', checkUsernameExists , async (req, res, next) => {
     }
   });
 
-  router.post('/login', checkUsernameNotExist , async (req, res, next) => {
+  router.post('/login', checkIfUsernameNotExist , async (req, res, next) => {
     try{
       let { username, password } = req.body;
       await Auth.getByFilter({username})

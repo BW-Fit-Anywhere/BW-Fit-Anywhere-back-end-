@@ -21,7 +21,7 @@ const restricted = (req, res, next) => {
   )
 }
 
-const checkUsernameExists = async (req,res,next) => {
+const checkIfUsernameExist = async (req,res,next) => {
     try{
         const { username } = req.body;
         const [user] = await User.getByFilter({username});
@@ -38,7 +38,7 @@ const checkUsernameExists = async (req,res,next) => {
     }
 }
 
-const checkUsernameNotExist = async (req,res,next) => {
+const checkIfUsernameNotExist = async (req,res,next) => {
     try{
         const { username } = req.body;
         const [user] = await User.getByFilter({username});
@@ -57,6 +57,6 @@ const checkUsernameNotExist = async (req,res,next) => {
 
 module.exports = {
   restricted,
-  checkUsernameExists,
-  checkUsernameNotExist,
+  checkIfUsernameExist,
+  checkIfUsernameNotExist,
 }
