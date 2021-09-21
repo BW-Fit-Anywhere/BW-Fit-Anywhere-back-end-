@@ -2,7 +2,7 @@ exports.seed = async function (knex) {
   await knex.raw('TRUNCATE TABLE roles CASCADE')
   await knex('users').truncate()
   await knex('roles').insert([
-    { role_name: 'admin' },
+    { role_name: 'administator' },
     { role_name: 'student' },
     { role_name: 'instructor' },
   ])
