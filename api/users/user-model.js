@@ -18,7 +18,7 @@ async function add({username, password, role_name}) {
     let created_user
     await db.transaction(async trx => {
         let role_id_to_use
-        const [role] = await trx('roles').where('role_name', 'role_name')
+        const [role] = await trx('roles').where('role_name', role_name)
         if (role) {
             role_id_to_use = role.role_id
         }
