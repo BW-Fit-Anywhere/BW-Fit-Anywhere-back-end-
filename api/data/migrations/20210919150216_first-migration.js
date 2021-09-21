@@ -15,10 +15,21 @@ exports.up = function (knex) {
         .inTable('roles')
         .onDelete('CASCADE')
     })
+    .createTable('classes', classes => {
+      classes.increments('class_id')
+      classes.string('name', 250).notNullable()
+      classes.string('type', 150).notNullable()
+      classes.string('start_time', 100).notNullable()
+      classes.string('intensity_level', 150).notNullable()
+      classes.string('location', 250).notNullable()
+      classes.integer('number_registered').notNullable()
+      classes.integer('max_class_size').notNullable()
+    })
 }
 
 exports.down = function (knex) {
   return knex.schema
+    .dropTableIfExists('classes')
     .dropTableIfExists('users')
     .dropTableIfExists('roles')
 }
