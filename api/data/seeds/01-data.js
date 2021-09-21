@@ -3,7 +3,7 @@ exports.seed = async function (knex) {
   await knex('users').truncate()
   await knex('roles').insert([
     { role_name: 'administator' },
-    { role_name: 'student' },
+    { role_name: 'client' },
     { role_name: 'instructor' },
   ])
   await knex('users').insert([
