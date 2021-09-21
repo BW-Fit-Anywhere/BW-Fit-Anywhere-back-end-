@@ -4,19 +4,33 @@ async function getAll() {
     return await db('users');
 }
 
-async function getByFilter(filter){
+async function getByFilter(filter) {
     return await db('users')
-    .where(filter)
+        .where(filter)
 }
 
-async function getById(id){
+async function getById(id) {
     return await db('users')
-    .where('user_id', id)
+        .where('user_id', id)
 }
 
-async function add (user){
-    const [userObject] = await db('users').insert(user, ['user_id', 'username', 'password'])
-    return userObject
+async function add({username, password, role_name}) {
+    let created_user
+    await db.transaction(async trx => {
+        let role_id_to_use
+        const [role] = await trx('roles').where('role_name', 'role_name')
+        if (role) {
+            role_id_to_use = role.role_id
+        }
+        else {
+            const [role_id] = await trx('roles').insert({ role_name: role_name })
+            role_id_to_use = role_id
+        }
+        const [user_id] = await trx('users').insert({ username, password, role_id: role_id_to_use })
+        created_user = user_id
+    })
+
+    return created_user
 }
 
 module.exports = {
