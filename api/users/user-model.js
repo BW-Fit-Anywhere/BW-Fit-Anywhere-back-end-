@@ -26,8 +26,8 @@ async function add({username, password, role_name}) {
             const [role_id] = await trx('roles').insert({ role_name: role_name })
             role_id_to_use = role_id
         }
-        const [user_id] = await trx('users').insert({ username, password, role_id: role_id_to_use })
-        created_user = user_id
+        const [user] = await trx('users').insert({ username, password, role_id: role_id_to_use }, ['username', 'password', 'role_id'])
+        created_user = user
     })
 
     return created_user
