@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const md = require('./classes-middleware')
+const { checkAccountId, checkAccountNameUnique, checkAccountPayload } = require('./classes-middleware')
 const Classes = require('./classes-model')
 
 // router.get('/', (req,res) => {
@@ -16,7 +16,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:id', md.checkAccountId, async (req, res, next) => {
+router.get('/:id', checkAccountId , async (req, res, next) => {
   try{
     res.json(req.classes)
   }
