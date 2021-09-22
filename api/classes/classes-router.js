@@ -1,8 +1,9 @@
 const router = require('express').Router()
 const { checkAccountId, checkAccountNameUnique, checkAccountPayload } = require('./classes-middleware')
+const { restricted } = require('../auth/auth-middleware')
 const Classes = require('./classes-model')
 
-router.get('/', async (req, res, next) => {
+router.get('/', restricted, async (req, res, next) => {
   try {
     const classes = await Classes.getAll()
     res.status(200).json(classes)
@@ -11,7 +12,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:id', checkAccountId , async (req, res, next) => {
+router.get('/:id', restricted, checkAccountId , async (req, res, next) => {
   try{
     res.json(req.classes)
   }
@@ -22,6 +23,7 @@ router.get('/:id', checkAccountId , async (req, res, next) => {
 
 router.post(
   '/',
+  restricted,
   checkAccountPayload,
   checkAccountNameUnique,
   async (req, res, next) => {
@@ -45,6 +47,7 @@ router.post(
 
 router.put(
   '/:id',
+  restricted,
   checkAccountId,
   checkAccountPayload,
   async (req, res, next) => {
@@ -56,7 +59,7 @@ router.put(
     }
   });
 
-router.delete('/:id', checkAccountId, async (req, res, next) => {
+router.delete('/:id', restricted, checkAccountId, async (req, res, next) => {
   try {
     await Classes.deleteById(req.params.id)
     res.json(req.classes)
