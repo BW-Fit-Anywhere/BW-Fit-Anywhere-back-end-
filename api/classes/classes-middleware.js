@@ -1,5 +1,5 @@
 const Classes = require('./classes-model')
-const db = require('../data/db-config')
+const db = require('../../data/db-config')
 
 exports.checkAccountPayload = (req, res, next) => {
   const error = { status: 400 }
@@ -49,6 +49,7 @@ exports.checkAccountPayload = (req, res, next) => {
   } else {
     next()
   }
+}
 
   exports.checkAccountNameUnique = async (req, res, next) => {
     try {
@@ -81,5 +82,3 @@ exports.checkAccountPayload = (req, res, next) => {
     }
   }
 
-
-}
