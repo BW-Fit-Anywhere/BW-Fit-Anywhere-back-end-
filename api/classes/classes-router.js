@@ -16,9 +16,9 @@ router.get('/', (req,res) => {
 //   }
 // })
 
-router.get('/:id', md.checkAccountId, async (req, res, next) => {
-  res.json(req.classes)
-})
+// router.get('/:id', md.checkAccountId, async (req, res, next) => {
+//   res.json(req.classes)
+// })
 
 router.post(
   '/',
