@@ -2,19 +2,19 @@ const router = require('express').Router()
 const md = require('./classes-middleware')
 const Classes = require('./classes-model')
 
-router.get('/', (req,res) => {
-  res.json('ok!');
-})
-
-
-// router.get('/', async (req, res, next) => {
-//   try {
-//     const classes = await Classes.getAll()
-//     res.status(200).json(classes)
-//   } catch (err) {
-//     next(err)
-//   }
+// router.get('/', (req,res) => {
+//   res.json('ok!');
 // })
+
+
+router.get('/', async (req, res, next) => {
+  try {
+    const classes = await Classes.getAll()
+    res.status(200).json(classes)
+  } catch (err) {
+    next(err)
+  }
+})
 
 // router.get('/:id', md.checkAccountId, async (req, res, next) => {
 //   res.json(req.classes)
