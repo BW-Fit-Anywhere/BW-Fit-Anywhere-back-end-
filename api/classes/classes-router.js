@@ -3,22 +3,18 @@ const md = require('./classes-middleware')
 const Classes = require('./classes-model')
 
 
-router.get('/', (req,res) => {
-  res.status(200).json('ok!');
+router.get('/', async (req, res, next) => {
+  try {
+    const classes = await Classes.getAll()
+    res.status(200).json(classes)
+  } catch (err) {
+    next(err)
+  }
 })
 
-// router.get('/', async (req, res, next) => {
-//   try {
-//     const classes = await Classes.getAll()
-//     res.status(200).json(classes)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
-
-// router.get('/:id', md.checkAccountId, async (req, res, next) => {
-//   res.json(req.classes)
-// })
+router.get('/:id', md.checkAccountId, async (req, res, next) => {
+  res.json(req.classes)
+})
 
 router.post(
   '/',
@@ -63,12 +59,6 @@ router.delete('/:id', md.checkAccountId, async (req, res, next) => {
   } catch (err) {
     next(err)
   }
-})
-
-router.use((err, req, res, next) => { // eslint-disable-line
-  res.status(err.status || 500).json({
-    message: err.message,
-  })
 })
 
 module.exports = router;
