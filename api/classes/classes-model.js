@@ -5,7 +5,7 @@ const getAll = () => {
 }
 
 const getById = id => {
-  return db('classes').where('id', id).first()
+  return db('classes').where('class_id', id).first()
 }
 
 const create = async classes => {
@@ -14,12 +14,12 @@ const create = async classes => {
 }
 
 const updateById = async (id, classes) => {
-  await db('classes').where('id', id).update(classes)
+  await db('classes').where('class_id', id).update(classes)
   return getById(id)
 }
 
 const deleteById = id => {
-  return db('classes').where('id', id).del()
+  return db('classes').where('class_id', id).del()
 }
 module.exports = {
   getAll,
