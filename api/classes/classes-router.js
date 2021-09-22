@@ -6,7 +6,7 @@ const Classes = require('./classes-model')
 router.get('/', async (req, res, next) => {
   try {
     const classes = await Classes.getAll()
-    res.json(classes)
+    res.status(200).json(classes)
   } catch (err) {
     next(err)
   }
